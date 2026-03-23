@@ -56,6 +56,7 @@
           radial-gradient(circle at top left, hsl(160 84% 39% / 0.08), transparent 28%),
           linear-gradient(180deg, #fbfbfb 0%, #f5f8fa 100%);
         color: var(--text);
+        overflow-x: hidden;
       }
 
       img {
@@ -282,7 +283,7 @@
           url("https://htmldesigntemplates.com/html/realshield/images/slider/2.jpg")
             center/cover no-repeat;
         box-shadow: var(--shadow-soft);
-        overflow: visible;
+        overflow: hidden;
       }
 
       .hero > .container {
@@ -687,6 +688,10 @@
           min-height: auto;
           display: block;
           padding: 112px 0 24px;
+        }
+
+        .hero::after {
+          display: none;
         }
 
         h1 {
