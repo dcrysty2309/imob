@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Estate Premium UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: hsl(160 84% 39%);
+        --primary-dark: hsl(160 84% 33%);
+        --background: #fbfbfb;
+        --card: #ffffff;
+        --text: #0a1c1f;
+        --secondary: #64748b;
+        --line: #edf1f4;
+        --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+        --shadow-card: 0 20px 40px rgba(15, 23, 42, 0.07);
+        --radius-lg: 20px;
+        --radius-md: 16px;
+        --radius-sm: 14px;
+        --container-xl: 1240px;
+        --container-lg: 1180px;
+        --container-md: 1080px;
+        --container-sm: 980px;
+        --header-offset-top: 14px;
+        --header-row-height: 44px;
+        --header-line-gap: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background:
+          radial-gradient(circle at top left, hsl(160 84% 39% / 0.08), transparent 28%),
+          linear-gradient(180deg, #fbfbfb 0%, #f5f8fa 100%);
+        color: var(--text);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .container {
+        width: min(calc(100% - 48px), var(--container-xl));
+        margin: 0 auto;
+      }
+
+      .container-xl {
+        max-width: var(--container-xl);
+      }
+
+      .container-lg {
+        max-width: var(--container-lg);
+      }
+
+      .container-md {
+        max-width: var(--container-md);
+      }
+
+      .container-sm {
+        max-width: var(--container-sm);
+      }
+
+      .page {
+        padding: 0 0 100px;
+      }
+
+      .hero-shell {
+        position: relative;
+      }
+
+      .hero-shell::after {
+        content: "";
+        position: absolute;
+        top: calc(var(--header-offset-top) + var(--header-row-height) + var(--header-line-gap));
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.18);
+        z-index: 25;
+      }
+
+      .site-header {
+        position: absolute;
+        top: var(--header-offset-top);
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(calc(100% - 48px), var(--container-xl));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        z-index: 30;
+        min-height: var(--header-row-height);
+        padding: 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        color: #fff;
+      }
+
+      .brand img {
+        width: auto;
+        height: 44px;
+      }
+
+      .site-nav {
+        display: inline-flex;
+        align-items: center;
+        gap: 34px;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .site-nav a {
+        position: relative;
+        padding: 10px 0;
+        border-radius: 0;
+        transition: color 160ms ease, opacity 160ms ease, transform 160ms ease;
+      }
+
+      .site-nav a::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        width: 0;
+        bottom: 2px;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--primary);
+        transform-origin: center;
+        opacity: 0;
+        transition: left 180ms ease, width 180ms ease, opacity 180ms ease;
+      }
+
+      .site-nav a:hover {
+        color: var(--primary);
+      }
+
+      .site-nav a:hover::after {
+        left: 0;
+        width: 100%;
+        opacity: 1;
+      }
+
+      .site-nav a.active {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .site-nav a.active:hover {
+        color: var(--primary);
+      }
+
+      .button {
+        height: 48px;
+        padding: 0 20px;
+        border: 0;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      }
+
+      .button:hover {
+        transform: none;
+      }
+
+      .button-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 14px 30px hsl(160 84% 39% / 0.2);
+      }
+
+      .button-primary:hover {
+        background: var(--primary-dark);
+      }
+
+      .button-secondary {
+        background: transparent;
+        color: #fff;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+      }
+
+      .header-cta {
+        height: 44px;
+        padding: 0 18px;
+        border-radius: 12px;
+        color: #fff;
+        background: var(--primary);
+        box-shadow: 0 12px 24px hsl(160 84% 39% / 0.28);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .header-cta:hover {
+        background: var(--primary-dark);
+      }
+
+      .hero {
+        position: relative;
+        min-height: clamp(500px, 64vh, 760px);
+        display: flex;
+        align-items: center;
+        padding: 132px 72px 96px;
+        background:
+          linear-gradient(90deg, rgba(10, 28, 31, 0.84) 0%, rgba(10, 28, 31, 0.62) 38%, rgba(10, 28, 31, 0.22) 100%),
+          linear-gradient(180deg, hsl(160 84% 39% / 0.08), rgba(10, 28, 31, 0.02)),
+          url("https://htmldesigntemplates.com/html/realshield/images/slider/2.jpg")
+            center/cover no-repeat;
+        box-shadow: var(--shadow-soft);
+        overflow: visible;
+      }
+
+      .hero > .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .hero::before {
+        inset: 0;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 88px 88px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 92%);
+      }
+
+      .hero::after {
+        width: 520px;
+        height: 520px;
+        right: -80px;
+        top: -120px;
+        border-radius: 999px;
+        background: radial-gradient(circle, hsl(160 84% 39% / 0.18), transparent 68%);
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: 300px;
+        padding-top: 0;
+        text-align: left;
+      }
+
+      h1 {
+        max-width: 14ch;
+        margin: 20px 0 14px;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 48px;
+        font-weight: 800;
+        line-height: 48px;
+        letter-spacing: -0.04em;
+        color: #fff;
+      }
+
+      .hero-copy {
+        max-width: 680px;
+        margin: 0 0 14px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 16px;
+        line-height: 25px;
+      }
+
+      .hero-accent {
+        color: var(--primary);
+      }
+
+      .hero-proof {
+        margin: 0 0 20px;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .hero-search {
+        width: min(100%, 610px);
+        margin-top: 24px;
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: min(100%, 610px);
+        padding: 5px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 30px 70px rgba(10, 28, 31, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .search-input-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        min-height: 48px;
+        padding: 0 16px;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: none;
+      }
+
+      .search-icon {
+        flex: none;
+        color: #94a3b8;
+      }
+
+      .search-input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--text);
+        font-size: 0.98rem;
+        font-weight: 500;
+      }
+
+      .search-input::placeholder {
+        color: #94a3b8;
+      }
+
+      .search-button {
+        min-width: 114px;
+        height: 48px;
+        border-radius: 14px;
+        font-size: 0.94rem;
+      }
+
+      .home-after-hero {
+        padding-top: 20px;
+      }
+
+      .section {
+        margin-top: 72px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+
+      .section-kicker {
+        margin: 0 0 10px;
+        color: var(--primary-dark);
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: 2.2rem;
+        letter-spacing: -0.05em;
+      }
+
+      .section-subtitle {
+        max-width: 520px;
+        margin: 10px 0 0;
+        color: var(--secondary);
+        line-height: 1.7;
+      }
+
+      .property-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(320px, 1fr));
+        gap: 28px;
+      }
+
+      .property-card {
+        width: 100%;
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-card);
+      }
+
+      .property-media {
+        position: relative;
+        height: 220px;
+      }
+
+      .property-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .badge-owner {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--primary-dark);
+        font-size: 0.82rem;
+        font-weight: 700;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+      }
+
+      .property-body {
+        padding: 22px;
+      }
+
+      .property-price-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .property-price {
+        font-size: 1.35rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .property-location {
+        color: var(--secondary);
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+
+      .property-title {
+        margin: 0 0 16px;
+        font-size: 1.18rem;
+        letter-spacing: -0.03em;
+      }
+
+      .property-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 18px;
+        padding: 14px;
+        border-radius: 16px;
+        background: #f8fafc;
+      }
+
+      .property-stat span {
+        display: block;
+        color: var(--secondary);
+        font-size: 0.78rem;
+        margin-bottom: 6px;
+      }
+
+      .property-stat strong {
+        font-size: 0.98rem;
+      }
+
+      .card-actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      .card-actions .button {
+        flex: 1;
+      }
+
+      .insight-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .insight-card {
+        padding: 28px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow: var(--shadow-card);
+      }
+
+      .insight-card strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        letter-spacing: -0.05em;
+      }
+
+      .insight-card p {
+        margin: 0;
+        color: var(--secondary);
+        line-height: 1.7;
+      }
+
+      @media (max-width: 1180px) {
+        .hero {
+          min-height: 58vh;
+          padding: 116px 56px 84px;
+        }
+
+        .hero-search {
+          width: min(100%, 610px);
+        }
+
+        .home-after-hero {
+          padding-top: 32px;
+        }
+
+        .property-grid,
+        .insight-strip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 820px) {
+        .page {
+          padding-top: 20px;
+        }
+
+        .container {
+          width: min(calc(100% - 32px), var(--container-xl));
+        }
+
+        .site-header {
+          position: relative;
+          top: 0;
+          left: 0;
+          transform: none;
+          width: min(calc(100% - 32px), var(--container-lg));
+          flex-direction: column;
+          align-items: center;
+          padding: 12px 0 0;
+        }
+
+        .hero-shell::after {
+          top: 128px;
+        }
+
+        .site-nav {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .hero {
+          min-height: auto;
+          display: block;
+          padding: 56px 24px 32px;
+        }
+
+        h1 {
+          max-width: none;
+          font-size: 42px;
+        }
+
+        .hero-search {
+          position: relative;
+          left: auto;
+          bottom: auto;
+          transform: none;
+          width: 100%;
+          margin-top: 24px;
+        }
+
+        .search-bar {
+          width: 100%;
+          flex-direction: column;
+        }
+
+        .search-input-wrap,
+        .search-button,
+        .property-grid,
+        .insight-strip {
+          width: 100%;
+        }
+
+        .home-after-hero {
+          padding-top: 32px;
+        }
+
+        .property-grid,
+        .insight-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .section-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="hero-shell">
+        <header class="site-header">
+          <a class="brand" href="#">
+            <img src="assets/logo-realshield-white.png" alt="VerdeCasa" />
+          </a>
+
+          <nav class="site-nav">
+            <a class="active" href="#">Despre noi</a>
+            <a href="#">FAQ</a>
+            <a href="#">Pricing</a>
+          </nav>
+
+          <button class="button header-cta" type="button">Contacteaza-ne</button>
+        </header>
+
+        <main>
+          <section class="hero">
+            <div class="container container-xl">
+              <div class="hero-grid">
+                <h1>Gaseste proprietatea<br /><span class="hero-accent">perfecta</span> pentru tine</h1>
+                <p class="hero-copy">
+                  Cauta printre mii de proprietati din toata tara. Simplu, rapid si fara comisioane ascunse.
+                </p>
+                <div class="hero-search">
+                  <div class="search-bar" aria-label="Property search">
+                    <div class="search-input-wrap">
+                      <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8" />
+                        <path d="M16 16l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                      </svg>
+                      <input class="search-input" type="text" placeholder="Cauta dupa oras, zona sau strada" />
+                    </div>
+                    <button class="button button-primary search-button" type="button">Cauta</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="home-after-hero">
+          <div class="container container-xl">
+          <section class="section">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker">Listari recomandate</p>
+                <h2 class="section-title">Proprietati curate, direct comparabile</h2>
+                <p class="section-subtitle">
+                  Carduri aerisite, cu suficiente detalii pentru triere rapida:
+                  pret, suprafata, cost pe mp si statutul listarii.
+                </p>
+              </div>
+              <button class="button button-secondary" type="button">Vezi toate</button>
+            </div>
+
+            <div class="property-grid">
+              <article class="property-card">
+                <div class="property-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80"
+                    alt="Apartament modern cu ferestre mari"
+                  />
+                  <div class="badge-owner">Direct de la proprietar</div>
+                </div>
+                <div class="property-body">
+                  <div class="property-price-row">
+                    <div class="property-price">€219.000</div>
+                    <div class="property-location">Aviatiei</div>
+                  </div>
+                  <h3 class="property-title">Apartament luminos cu finisaje premium</h3>
+                  <div class="property-stats">
+                    <div class="property-stat">
+                      <span>Suprafata</span>
+                      <strong>86 mp</strong>
+                    </div>
+                    <div class="property-stat">
+                      <span>Pret / mp</span>
+                      <strong>€2.546</strong>
+                    </div>
+                    <div class="property-stat">
+                      <span>Camere</span>
+                      <strong>3</strong>
+                    </div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="button button-primary" type="button">Detalii</button>
+                    <button class="button button-secondary" type="button">Tur virtual</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="property-card">
+                <div class="property-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80"
+                    alt="Penthouse elegant cu zona de dining"
+                  />
+                  <div class="badge-owner">Direct de la proprietar</div>
+                </div>
+                <div class="property-body">
+                  <div class="property-price-row">
+                    <div class="property-price">€312.000</div>
+                    <div class="property-location">Herastrau</div>
+                  </div>
+                  <h3 class="property-title">Penthouse discret cu terasa si vedere deschisa</h3>
+                  <div class="property-stats">
+                    <div class="property-stat">
+                      <span>Suprafata</span>
+                      <strong>124 mp</strong>
+                    </div>
+                    <div class="property-stat">
+                      <span>Pret / mp</span>
+                      <strong>€2.516</strong>
+                    </div>
+                    <div class="property-stat">
+                      <span>Camere</span>
+                      <strong>4</strong>
+                    </div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="button button-primary" type="button">Detalii</button>
+                    <button class="button button-secondary" type="button">Compara</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="property-card">
+                <div class="property-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80"
+                    alt="Apartament minimalist cu canapea si bucatarie open-space"
+                  />
+                  <div class="badge-owner">Direct de la proprietar</div>
+                </div>
+                <div class="property-body">
+                  <div class="property-price-row">
+                    <div class="property-price">€184.500</div>
+                    <div class="property-location">Tineretului</div>
+                  </div>
+                  <h3 class="property-title">Apartament eficient, optim pentru familie tanara</h3>
+                  <div class="property-stats">
+                    <div class="property-stat">
+                      <span>Suprafata</span>
+                      <strong>78 mp</strong>
+                    </div>
+                    <div class="property-stat">
+                      <span>Pret / mp</span>
+                      <strong>€2.365</strong>
+                    </div>
+                    <div class="property-stat">
+                      <span>Camere</span>
+                      <strong>3</strong>
+                    </div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="button button-primary" type="button">Detalii</button>
+                    <button class="button button-secondary" type="button">Salveaza</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+          </div>
+
+          <div class="container container-xl">
+          <section class="section">
+            <div class="insight-strip">
+              <div class="insight-card">
+                <strong>320-360px</strong>
+                <p>Carduri echilibrate, cu ierarhie clara intre pret, titlu si specificatii cheie.</p>
+              </div>
+              <div class="insight-card">
+                <strong>56px search</strong>
+                <p>Cautare compacta si premium, gandita pentru desktop, fara campuri supraincarcate vizual.</p>
+              </div>
+              <div class="insight-card">
+                <strong>1200px shell</strong>
+                <p>Layout centrat, cu sectiuni aerisite si ritm constant intre hero, listari si informatii suport.</p>
+              </div>
+            </div>
+          </section>
+          </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
