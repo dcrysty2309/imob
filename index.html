@@ -359,6 +359,7 @@
       }
 
       .hero-search {
+        position: relative;
         width: min(100%, 610px);
         margin-top: 24px;
       }
@@ -411,6 +412,56 @@
         height: 48px;
         border-radius: 14px;
         font-size: 0.94rem;
+      }
+
+      .search-results {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 24px;
+        right: 24px;
+        display: none;
+        padding: 14px 0;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 24px 56px rgba(10, 28, 31, 0.18);
+        border: 1px solid rgba(15, 23, 42, 0.06);
+        z-index: 20;
+      }
+
+      .search-results.is-visible {
+        display: block;
+      }
+
+      .search-results-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .search-results-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 26px;
+        color: #1e293b;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .search-results-item + .search-results-item {
+        border-top: 1px solid rgba(15, 23, 42, 0.04);
+      }
+
+      .search-results-item i {
+        color: #94a3b8;
+        font-size: 1rem;
+      }
+
+      .search-results-item mark {
+        padding: 0;
+        background: transparent;
+        color: var(--primary);
+        font-weight: 800;
       }
 
       .home-after-hero {
@@ -737,6 +788,19 @@
           height: 50px;
         }
 
+        .search-results {
+          left: 0;
+          right: 0;
+          top: calc(100% + 8px);
+          border-radius: 18px;
+          padding: 8px 0;
+        }
+
+        .search-results-item {
+          padding: 14px 18px;
+          font-size: 0.96rem;
+        }
+
         .home-after-hero {
           padding-top: 12px;
         }
@@ -873,9 +937,18 @@
                         <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8" />
                         <path d="M16 16l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
                       </svg>
-                      <input class="search-input" type="text" placeholder="Selecteaza orasul dorit" />
+                      <input class="search-input" id="hero-search-input" type="text" placeholder="Selecteaza orasul dorit" autocomplete="off" />
                     </div>
                     <button class="button button-primary search-button" type="button">Cauta</button>
+                  </div>
+                  <div class="search-results" id="hero-search-results" aria-live="polite">
+                    <ul class="search-results-list">
+                      <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><mark>B</mark>ucuresti</span></li>
+                      <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><mark>B</mark>rasov</span></li>
+                      <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span>Si<mark>b</mark>iu</span></li>
+                      <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><mark>B</mark>aia Mare</span></li>
+                      <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><mark>B</mark>uzau</span></li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -1028,5 +1101,26 @@
         </main>
       </div>
     </div>
+    <script>
+      const heroSearchInput = document.getElementById("hero-search-input");
+      const heroSearchResults = document.getElementById("hero-search-results");
+
+      if (heroSearchInput && heroSearchResults) {
+        const toggleSearchResults = () => {
+          const hasValue = heroSearchInput.value.trim().length > 0;
+          heroSearchResults.classList.toggle("is-visible", hasValue);
+        };
+
+        heroSearchInput.addEventListener("input", toggleSearchResults);
+        heroSearchInput.addEventListener("focus", toggleSearchResults);
+
+        document.addEventListener("click", (event) => {
+          const searchScope = event.target.closest(".hero-search");
+          if (!searchScope) {
+            heroSearchResults.classList.remove("is-visible");
+          }
+        });
+      }
+    </script>
   </body>
 </html>
