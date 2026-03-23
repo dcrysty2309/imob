@@ -283,7 +283,7 @@
           url("https://htmldesigntemplates.com/html/realshield/images/slider/2.jpg")
             center/cover no-repeat;
         box-shadow: var(--shadow-soft);
-        overflow: hidden;
+        overflow: visible;
       }
 
       .hero > .container {
@@ -417,11 +417,12 @@
       .search-results {
         position: absolute;
         top: calc(100% + 10px);
-        left: 24px;
-        right: 24px;
+        left: 18px;
+        width: calc(100% - 164px);
+        max-width: 420px;
         display: none;
-        padding: 14px 0;
-        border-radius: 22px;
+        padding: 8px 0;
+        border-radius: 18px;
         background: rgba(255, 255, 255, 0.98);
         box-shadow: 0 24px 56px rgba(10, 28, 31, 0.18);
         border: 1px solid rgba(15, 23, 42, 0.06);
@@ -442,9 +443,9 @@
         display: flex;
         align-items: center;
         gap: 14px;
-        padding: 16px 26px;
+        padding: 13px 20px;
         color: #1e293b;
-        font-size: 1rem;
+        font-size: 0.96rem;
         font-weight: 600;
       }
 
@@ -790,7 +791,8 @@
 
         .search-results {
           left: 0;
-          right: 0;
+          width: 100%;
+          max-width: none;
           top: calc(100% + 8px);
           border-radius: 18px;
           padding: 8px 0;
@@ -946,7 +948,6 @@
                       <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><mark>B</mark>ucuresti</span></li>
                       <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><mark>B</mark>rasov</span></li>
                       <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span>Si<mark>b</mark>iu</span></li>
-                      <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><mark>B</mark>aia Mare</span></li>
                       <li class="search-results-item"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><mark>B</mark>uzau</span></li>
                     </ul>
                   </div>
